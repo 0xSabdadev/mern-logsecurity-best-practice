@@ -4,7 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 <p align="center">
    <svg>
-  <img width="180" src="https://media.giphy.com/media/kdFc8fubgS31b8DsVu/giphy.gif" alt="react-delay-5" />
+  <img width="180" src="https://i.ibb.co/g7tvf0Z/giphy.gif" alt="react-delay-5" />
+    <img width="180" src="https://media.giphy.com/media/kdFc8fubgS31b8DsVu/giphy.gif" alt="react-delay-5" />
  </svg>
 </p>
 <br/>
