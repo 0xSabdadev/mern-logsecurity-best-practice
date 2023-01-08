@@ -1,5 +1,5 @@
 GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJCdWRpIiwiZW1haWwiOiJidWRpZGlAZ21haWwuY29tIiwiaWF0IjoxNjczMTQ2NzE5LCJleHAiOjE2NzMxNDY3Mzl9.Ops_3DMOLBTloDNp58iv60gGcmOX3D9dGmeIIRGpXis
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJCdWRpIiwiZW1haWwiOiJidWRpZGlAZ21haWwuY29tIiwiaWF0IjoxNjczMTQ4ODE3LCJleHAiOjE2NzMxNDg4MzJ9.vzNaxHeybQkY-r3SN0pAyw4N1NTxPdnQfZeEN6NFk5E
 ###
 POST http://localhost:5000/users
 Content-Type: application/json
@@ -19,3 +19,9 @@ Content-Type: application/json
     "email":"budidi@gmail.com",
     "password":"123425"
 }
+
+###
+GET http://localhost:5000/token
+
+###
+DELETE http://localhost:5000/logout
