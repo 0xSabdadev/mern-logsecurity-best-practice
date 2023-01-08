@@ -1,5 +1,6 @@
 import Users from '../models/UserModel.js'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 //method yg berhubungan dengan getdata/database pake async
 export const getUsers = async (req, res) => {
@@ -25,5 +26,54 @@ export const Register = async (req, res) => {
         res.json({msg: 'Register Berhasil'})
     } catch (error) {
         console.log(error)
+    }
+}
+export const Login = async (req, res) => {
+    try {
+        //validasi email n pass yg diinput client
+        const user = await Users.findAll({
+            where: {
+                email: req.body.email,
+            },
+        })
+        const match = await bcrypt.compare(req.body.password, user[0].password)
+        if (!match)
+            return res.status(400).json({
+                msg: 'Wrong Password',
+            })
+        //validasi end
+        const userId = user[0].id
+        const name = user[0].name
+        const email = user[0].email
+        //access token berdasar id,name,email
+        const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '20s',
+        })
+        const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: '1d',
+        })
+        //simpan refreshtok ke db
+        await Users.update(
+            {
+                refresh_token: refreshToken,
+            },
+            {
+                where: {
+                    id: userId,
+                },
+            },
+        )
+        //cokie refreshtoken yg dikirim ke client
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            //24jam
+            maxAge: 24 * 60 * 60 * 1000,
+            // secure: true,
+        })
+        res.json({accessToken})
+    } catch (error) {
+        res.status(404).json({
+            msg: 'Email tidak ditemukan',
+        })
     }
 }
