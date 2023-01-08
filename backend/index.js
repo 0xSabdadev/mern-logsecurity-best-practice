@@ -2,6 +2,7 @@ import express from 'express'
 import db from './config/Database.js'
 // import Users from './models/UserModel.js'
 import router from './routes/index.js'
+import bodyParser from 'body-parser'
 
 const app = express()
 const port = 5000
